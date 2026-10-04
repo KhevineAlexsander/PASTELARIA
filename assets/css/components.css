@@ -1,0 +1,663 @@
+/* ── Components ── */
+
+/* ── Category Badge ── */
+.cat-badge {
+  background: var(--red);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.cat-badge.especial {
+  background: var(--gold);
+  color: #111;
+}
+
+/* ── Item Grid & Cards ── */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.item-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.item-card.especial {
+  border-color: var(--gold);
+}
+
+.item-name {
+  font-size: var(--font-size-base);
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.item-desc {
+  font-size: var(--font-size-sm);
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.item-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--red);
+}
+
+/* ── Buttons ── */
+.btn-add {
+  background: var(--gold);
+  border: none;
+  color: #111;
+  font-weight: 800;
+  font-size: var(--font-size-lg);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-add:hover {
+  background: var(--gold-dark);
+  transform: scale(1.1);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #111;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  font-size: var(--font-size-md);
+  font-weight: 800;
+  width: 100%;
+  transition: background var(--transition-base);
+}
+
+.btn-primary:hover {
+  background: var(--gold-dark);
+}
+
+.btn-status {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: 5px 12px;
+  border: none;
+  border-radius: var(--radius-full);
+  transition: opacity var(--transition-base);
+}
+
+.btn-status:hover {
+  opacity: .8;
+}
+
+.btn-next { background: var(--gold); color: #111; }
+.btn-del  { background: #eee; color: #c00; }
+
+.btn-checkout {
+  display: block;
+  width: calc(100% - 36px);
+  margin: 10px 18px 18px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-size: var(--font-size-base);
+  font-weight: 800;
+  transition: background var(--transition-base);
+}
+
+.btn-checkout:hover {
+  background: var(--green-dark);
+}
+
+.btn-save-price {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+/* ── Cart FAB ── */
+#cart-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  font-size: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+  z-index: var(--z-fab);
+}
+
+#cart-fab:hover {
+  transform: scale(1.1);
+}
+
+#cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--gold);
+  color: #111;
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Cart Drawer ── */
+#cart-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -8px 32px rgba(0,0,0,.2);
+  z-index: var(--z-drawer);
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform var(--transition-slow);
+}
+
+#cart-drawer.open {
+  transform: translateY(0);
+}
+
+.drawer-handle {
+  width: 40px;
+  height: 4px;
+  background: #ccc;
+  border-radius: 4px;
+  margin: 14px auto 0;
+}
+
+.drawer-title {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  padding: 14px 18px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-list {
+  padding: 10px 18px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.cart-item-price {
+  color: var(--red);
+  font-size: var(--font-size-sm);
+}
+
+.qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  background: #f0f0f0;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base);
+}
+
+.qty-btn:hover {
+  background: #e0e0e0;
+}
+
+.qty-num {
+  font-weight: 800;
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-total {
+  padding: 14px 18px 6px;
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid var(--border);
+}
+
+.cart-total span:last-child {
+  color: var(--red);
+}
+
+.cart-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px;
+  font-size: var(--font-size-md);
+}
+
+/* ── Overlay ── */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: var(--z-overlay);
+  display: none;
+}
+
+#overlay.open {
+  display: block;
+}
+
+/* ── Gestão Stats ── */
+.gestao-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.stat-val {
+  font-size: var(--font-size-3xl);
+  font-weight: 900;
+  color: var(--red);
+}
+
+.stat-val.green { color: var(--green); }
+
+.stat-lbl {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* ── Order Cards ── */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.order-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.order-id {
+  font-weight: 800;
+  font-size: var(--font-size-md);
+  color: var(--dark);
+}
+
+.order-badge {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.badge-pending   { background: var(--badge-pending-bg);  color: var(--badge-pending-fg); }
+.badge-making    { background: var(--badge-making-bg);   color: var(--badge-making-fg);  }
+.badge-ready     { background: var(--badge-ready-bg);    color: var(--badge-ready-fg);   }
+.badge-delivered { background: var(--badge-done-bg);     color: var(--badge-done-fg);    }
+
+.order-items {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-total-lbl {
+  font-weight: 800;
+  color: var(--red);
+}
+
+.order-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.order-time {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+/* ── Edit Card (Gestão Preços) ── */
+.edit-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-card-info {
+  flex: 1;
+}
+
+.edit-card-name {
+  font-weight: 800;
+  font-size: var(--font-size-md);
+}
+
+.edit-card-desc {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.edit-price-field {
+  width: 90px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--red);
+  text-align: right;
+}
+
+.edit-price-field:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+/* ── Modal ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.modal h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 10px;
+}
+
+.modal p {
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-size: var(--font-size-md);
+}
+
+.modal-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-btns button {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.btn-confirm { background: var(--green); color: #fff; }
+.btn-cancel  { background: #eee; color: #333; }
+
+/* ── Forms ── */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: var(--font-size-md);
+}
+
+.form-row input:focus,
+.form-row textarea:focus,
+.form-row select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* ── Panel cards (Config) ── */
+.panel-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.panel-card h3 {
+  font-size: var(--font-size-base);
+  margin-bottom: 14px;
+}
+
+/* ── Search ── */
+.search-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  background: #fff;
+}
+
+.search-wrap input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* ── WhatsApp Banner ── */
+.whatsapp-banner {
+  background: var(--whatsapp);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.wa-icon {
+  font-size: 1.4rem;
+}
+
+/* ── Order filter buttons ── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+}
+
+/* ── Toast ── */
+#toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: #222;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: all var(--transition-slow);
+  z-index: var(--z-toast);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Cart customer form area ── */
+.cart-customer {
+  padding: 0 18px 8px;
+}
+
+/* ── Edit list wrapper ── */
+.edit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

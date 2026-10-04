@@ -1,0 +1,7 @@
+/* ── main.css — Ponto de entrada dos estilos ── */
+@import './variables.css';
+@import './reset.css';
+@import './layout.css';
+@import './components.css';
+@import './responsive.css';
+@import './premium.css';

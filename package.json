@@ -1,0 +1,19 @@
+{
+  "name": "ki-delicia-pastelaria",
+  "version": "1.0.0",
+  "description": "Ki-Delícia Pastelaria — Sistema de cardápio e gestão de pedidos",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . --single --listen 3000",
+    "dev":   "npx serve . --single --listen 3000",
+    "build": "echo 'Projeto estático — nenhum build necessário.'",
+    "lint":  "npx eslint assets/js/**/*.js --ext .js"
+  },
+  "keywords": ["pastelaria", "cardapio", "pedidos", "gestao"],
+  "author": "Ki-Delícia Pastelaria",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "serve": "^14.2.3"
+  }
+}

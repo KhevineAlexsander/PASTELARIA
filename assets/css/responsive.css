@@ -1,0 +1,106 @@
+/* ── Responsividade ── */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .header-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .logo-title {
+    font-size: 1.25rem;
+  }
+
+  main {
+    padding: 16px 10px 100px;
+  }
+
+  .items-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .gestao-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header-inner {
+    gap: 10px;
+  }
+
+  .header-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo-title {
+    font-size: 1.1rem;
+  }
+
+  .logo-sub {
+    letter-spacing: 2px;
+  }
+
+  .nav-btn {
+    min-width: 80px;
+    font-size: 0.75rem;
+    padding: 10px 6px;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gestao-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-val {
+    font-size: 1.5rem;
+  }
+
+  .edit-card {
+    flex-wrap: wrap;
+  }
+
+  .edit-price-field {
+    width: 80px;
+  }
+
+  #cart-drawer {
+    max-height: 90vh;
+  }
+
+  .filter-bar {
+    gap: 6px;
+  }
+
+  .filter-btn {
+    font-size: 0.72rem;
+    padding: 6px 10px;
+  }
+
+  .modal {
+    width: 95%;
+  }
+
+  #toast {
+    width: 90%;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .logo-title {
+    font-size: 1rem;
+  }
+
+  .items-grid {
+    gap: 10px;
+  }
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /?tab=pedidos
+Disallow: /?tab=gestao
+Disallow: /?tab=config

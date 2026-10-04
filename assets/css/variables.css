@@ -1,0 +1,64 @@
+/* ── Ki-Delícia Design Tokens ── */
+:root {
+  /* Cores principais */
+  --gold:   #f5a623;
+  --gold-dark: #e09800;
+  --dark:   #1a1a1a;
+  --red:    #c0392b;
+  --red2:   #e74c3c;
+  --cream:  #fff8f0;
+  --card:   #ffffff;
+  --border: #f0e0d0;
+  --text:   #333333;
+  --muted:  #777777;
+  --green:  #27ae60;
+  --green2: #2ecc71;
+  --green-dark: #219a52;
+  --whatsapp: #25d366;
+
+  /* Status badges */
+  --badge-pending-bg:   #fff3cd;
+  --badge-pending-fg:   #856404;
+  --badge-making-bg:    #cfe2ff;
+  --badge-making-fg:    #0d6efd;
+  --badge-ready-bg:     #d1e7dd;
+  --badge-ready-fg:     #0a3622;
+  --badge-done-bg:      #e9ecef;
+  --badge-done-fg:      #495057;
+
+  /* Tipografia */
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-size-xs:  0.7rem;
+  --font-size-sm:  0.8rem;
+  --font-size-md:  0.9rem;
+  --font-size-base: 1rem;
+  --font-size-lg:  1.1rem;
+  --font-size-xl:  1.2rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.8rem;
+
+  /* Espaçamento */
+  --radius-sm:  8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 6px rgba(0,0,0,.05);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-lg: 0 6px 18px rgba(0,0,0,.12);
+
+  /* Transições */
+  --transition-fast: .15s ease;
+  --transition-base: .2s ease;
+  --transition-slow: .3s ease;
+
+  /* Z-index */
+  --z-nav:     100;
+  --z-fab:     200;
+  --z-overlay: 250;
+  --z-drawer:  300;
+  --z-modal:   500;
+  --z-toast:   999;
+}
