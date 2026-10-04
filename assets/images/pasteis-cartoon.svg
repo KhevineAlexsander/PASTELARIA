@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Cesta de pastéis crocantes</title>
+  <desc id="desc">Ilustração cartunesca de pastéis dourados em uma cesta, com folhas verdes e tomates ao fundo.</desc>
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#36551f"/><stop offset="1" stop-color="#172c19"/></linearGradient>
+    <linearGradient id="pastry" x2=".9" y2="1"><stop stop-color="#ffe89a"/><stop offset=".45" stop-color="#f9b83f"/><stop offset="1" stop-color="#dc751c"/></linearGradient>
+    <linearGradient id="basket" x2="0" y2="1"><stop stop-color="#704532"/><stop offset="1" stop-color="#3d251f"/></linearGradient>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.5"><feGaussianBlur stdDeviation="12"/></filter>
+    <pattern id="bubbles" width="46" height="38" patternUnits="userSpaceOnUse">
+      <circle cx="9" cy="10" r="3" fill="#fff4c0" opacity=".75"/><circle cx="31" cy="23" r="2.5" fill="#9a4c12" opacity=".48"/>
+      <circle cx="41" cy="5" r="1.8" fill="#fff4c0" opacity=".65"/>
+    </pattern>
+    <g id="pastel">
+      <path d="M0 38 42 0 258 22 218 226 4 202Z" fill="#a9501a" opacity=".45" transform="translate(8 10)"/>
+      <path d="M0 29 41 0 258 21 218 215 5 196Z" fill="url(#pastry)" stroke="#a95b1d" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M0 29 41 0 258 21 218 215 5 196Z" fill="url(#bubbles)" opacity=".64"/>
+      <path d="m11 38 37-27 196 20-37 172-195-18Z" fill="none" stroke="#fff0af" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 12" opacity=".9"/>
+      <path d="m53 26 170 17-27 131-164-15Z" fill="none" stroke="#ef9a2e" stroke-width="4" opacity=".65"/>
+    </g>
+  </defs>
+  <rect width="900" height="560" fill="url(#bg)"/>
+  <g opacity=".96">
+    <path d="M20 42q53-48 118 0-30 46-91 39Q19 75 20 42Zm18 9q42 0 70-9M764 49q50-47 112-4-23 53-82 54-30-13-30-50Zm22 7q42-3 67-16" fill="#78a831" stroke="#b1cf4d" stroke-width="6" stroke-linecap="round"/>
+    <path d="M57 154q49-45 100 4-35 45-84 39-22-14-16-43Zm687 2q49-44 100 1-31 48-83 44-24-13-17-45Z" fill="#4f812a" stroke="#92b83b" stroke-width="6"/>
+    <g fill="#e43c25" stroke="#a9211b" stroke-width="5"><circle cx="120" cy="243" r="48"/><circle cx="803" cy="256" r="48"/></g>
+    <g fill="#76a52e"><path d="m120 195 9 21 18-11-12 20 19 9-23 1-4 22-9-20-19 11 13-20-19-9 23-1Z"/><path d="m803 208 9 21 18-11-12 20 19 9-23 1-4 22-9-20-19 11 13-20-19-9 23-1Z"/></g>
+  </g>
+  <ellipse cx="450" cy="457" rx="390" ry="61" fill="#090f0c" opacity=".44" filter="url(#shadow)"/>
+  <g stroke-linejoin="round">
+    <use href="#pastel" transform="translate(95 178) rotate(-11 130 110)"/>
+    <use href="#pastel" transform="translate(302 90) rotate(8 130 110)"/>
+    <use href="#pastel" transform="translate(568 146) rotate(-9 130 110)"/>
+    <use href="#pastel" transform="translate(155 253) rotate(12 130 110)"/>
+    <use href="#pastel" transform="translate(402 226) rotate(-4 130 110)"/>
+    <use href="#pastel" transform="translate(594 255) rotate(11 130 110)"/>
+  </g>
+  <path d="M104 351q345 105 692 0l-40 133q-308 103-610 0Z" fill="url(#basket)" stroke="#2e1d19" stroke-width="15"/>
+  <path d="M93 360q352 106 714 0l-9 32q-347 104-697 0Z" fill="#9a6545" stroke="#37231c" stroke-width="10"/>
+  <g fill="none" stroke="#b17a53" stroke-width="13" opacity=".88">
+    <path d="M112 412q340 95 677 0M101 450q350 100 698 0M124 485q322 95 652 0"/>
+    <path d="M171 382q-32 45-21 121m102-98q-21 46-10 119m106-90q-9 44 0 111m111-83v85m111-111q12 48 8 116m111-146q27 52 17 115m91-164q44 44 25 101"/>
+  </g>
+  <path d="M108 373q338 100 684 0" fill="none" stroke="#d29a61" stroke-width="7" opacity=".8"/>
+</svg>

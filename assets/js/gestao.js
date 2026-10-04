@@ -8,6 +8,9 @@ import { saveMenu, saveConfig as persistConfig, loadConfig } from './storage.js'
 import { renderMenu } from './menu.js';
 import { renderStats } from './orders.js';
 import { toast } from './ui.js';
+import { isSupabaseConfigured, writeMenu, writeConfig } from './supabase.js';
+
+const STORE_MAPS_LINK = 'https://maps.app.goo.gl/23deY4MwVhXyifYx7';
 
 /**
  * Renderiza a lista de edição de preços do cardápio.
@@ -50,6 +53,7 @@ function _savePrice(id) {
   const ok = updateMenuItemPrice(id, val);
   if (ok) {
     saveMenu(getMenu());
+    if (isSupabaseConfigured()) writeMenu(getMenu()).catch(err => toast(`Erro ao salvar cardápio: ${err.message}`, 5000));
     renderMenu();
     toast(`Preço atualizado com sucesso! 💰`);
   }
@@ -64,18 +68,22 @@ export function loadConfigForm() {
   const cfg = loadConfig();
   _setVal('cfg-nome', cfg.nome || 'Ki-Delícia Pastelaria');
   _setVal('cfg-wpp',  cfg.wpp  || '(99) 98443-6545');
-  _setVal('cfg-end',  cfg.endereco || '');
+  _setVal('cfg-end',  cfg.endereco || STORE_MAPS_LINK);
 }
 
 /**
  * Salva as configurações da loja.
  */
-export function saveConfigForm() {
+export async function saveConfigForm() {
   const cfg = {
     nome:     _getVal('cfg-nome'),
     wpp:      _getVal('cfg-wpp'),
     endereco: _getVal('cfg-end'),
   };
+  if (isSupabaseConfigured()) {
+    try { await writeConfig({ nome: cfg.nome, wpp: cfg.wpp, endereco: cfg.endereco }); }
+    catch (error) { toast(`Erro ao salvar configurações: ${error.message}`, 5000); return; }
+  }
   persistConfig(cfg);
   _applyConfig(cfg);
   toast('Configurações salvas! ✅');
@@ -87,6 +95,19 @@ function _applyConfig(cfg) {
   if (banner && cfg.wpp) {
     banner.textContent = `${cfg.wpp} — Peça também pelo WhatsApp!`;
   }
+  const route = document.getElementById('store-route');
+  if (route && cfg.endereco) {
+    route.href = _mapsHref(cfg.endereco);
+    route.hidden = false;
+    const pickupRoute = document.getElementById('pickup-route');
+    if (pickupRoute) pickupRoute.href = route.href;
+  }
+}
+
+function _mapsHref(value) {
+  return /^https:\/\/(maps\.app\.goo\.gl|www\.google\.com\/maps\/)/i.test(value)
+    ? value
+    : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(value)}`;
 }
 
 function _getVal(id) {

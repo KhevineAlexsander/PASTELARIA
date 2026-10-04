@@ -34,13 +34,9 @@
 ════════════════════════════════════════════ -->
 <header>
   <div class="header-inner">
-    <img
-      src="assets/images/logo.jpg"
-      alt="Logo Ki-Delícia Pastelaria"
-      class="header-logo"
-      width="72"
-      height="72"
-    />
+    <button type="button" id="admin-login-btn" class="logo-access" aria-label="Acesso administrativo pela logo">
+      <img src="assets/images/logo.jpg" alt="Logo Ki-Delícia Pastelaria" class="header-logo" width="72" height="72" />
+    </button>
     <div class="header-text">
       <div class="logo-title">Ki-Delícia</div>
       <div class="logo-sub">Pastelaria</div>
@@ -49,15 +45,17 @@
   </div>
 </header>
 
+<nav aria-label="Navegação principal">
+  <button class="nav-btn active" data-tab="cardapio">🍽️ Cardápio</button>
+  <button class="nav-btn admin-nav" data-tab="produtos" hidden>🥟 Produtos</button>
+  <button class="nav-btn admin-nav" data-tab="mesas" hidden>▦ Mesas e QR</button>
+  <button class="nav-btn admin-nav" data-tab="config" hidden>⚙️ Configurações</button>
+</nav>
+
 <!-- ═══════════════════════════════════════════
      NAVEGAÇÃO
 ════════════════════════════════════════════ -->
-<nav aria-label="Navegação principal">
-  <button class="nav-btn active" data-tab="cardapio" aria-label="Abrir cardápio">🍽️ Cardápio</button>
-  <button class="nav-btn"        data-tab="pedidos"  aria-label="Ver pedidos">📋 Pedidos</button>
-  <button class="nav-btn"        data-tab="gestao"   aria-label="Painel de gestão">📊 Gestão</button>
-  <button class="nav-btn"        data-tab="config"   aria-label="Configurações">⚙️ Config</button>
-</nav>
+
 
 <!-- ═══════════════════════════════════════════
      CONTEÚDO PRINCIPAL
@@ -76,6 +74,8 @@
 
     <p>Confira sabores como pastel de queijo, carne e calabresa. Consulte o cardápio e compartilhe com alguém pelo WhatsApp.</p>
     <p><a id="share-menu-whatsapp" href="https://wa.me/?text=Confira%20o%20card%C3%A1pio%20da%20Ki-Del%C3%ADcia%20Pastelaria" target="_blank" rel="noopener noreferrer">Compartilhar cardápio pelo WhatsApp</a></p>
+    <p id="table-context" class="table-context" hidden></p>
+    <p><a id="store-route" href="#" target="_blank" rel="noopener noreferrer" hidden>📍 Como chegar à pastelaria</a></p>
 
     <div class="search-wrap">
       <span class="search-icon" aria-hidden="true">🔍</span>
@@ -97,86 +97,69 @@
 
   </section>
 
+
+
   <!-- ── PEDIDOS ── -->
-  <section class="tab-page" id="tab-pedidos" aria-label="Pedidos">
 
-    <div class="section-title"><span></span>PEDIDOS<span></span></div>
-
-    <div class="filter-bar" role="group" aria-label="Filtrar pedidos por status">
-      <button class="filter-btn btn-next active"  data-filter="all"        style="border-radius:8px">Todos</button>
-      <button class="filter-btn" data-filter="pendente"   style="background:var(--badge-pending-bg);color:var(--badge-pending-fg);border-radius:8px">Pendentes</button>
-      <button class="filter-btn" data-filter="preparando" style="background:var(--badge-making-bg);color:var(--badge-making-fg);border-radius:8px">Preparando</button>
-      <button class="filter-btn" data-filter="pronto"     style="background:var(--badge-ready-bg);color:var(--badge-ready-fg);border-radius:8px">Prontos</button>
-    </div>
-
-    <div class="order-list" id="order-list" aria-live="polite">
-      <div class="cart-empty">Nenhum pedido ainda. 🛒</div>
-    </div>
-
-  </section>
 
   <!-- ── GESTÃO ── -->
-  <section class="tab-page" id="tab-gestao" aria-label="Painel de gestão">
 
-    <div class="section-title"><span></span>PAINEL<span></span></div>
-    <div class="gestao-grid" id="stats-grid" aria-label="Estatísticas"></div>
-
-    <div class="section-title" style="margin-top:28px"><span></span>EDITAR PREÇOS<span></span></div>
-    <div class="edit-list" id="edit-list" aria-label="Lista de itens para edição de preço"></div>
-
-  </section>
 
   <!-- ── CONFIG ── -->
-  <section class="tab-page" id="tab-config" aria-label="Configurações">
 
-    <div class="section-title"><span></span>CONFIGURAÇÕES<span></span></div>
 
-    <!-- Adicionar item -->
+
+
+  <section class="tab-page" id="tab-produtos" aria-label="Cadastro de produtos">
+    <h1 class="section-title">Gerenciar produtos</h1>
+    <form class="panel-card" id="product-form">
+      <h3 id="product-form-title">Cadastrar produto</h3>
+      <input type="hidden" id="product-id">
+      <div class="form-row"><label for="product-name">Nome</label><input id="product-name" maxlength="80" required></div>
+      <div class="form-row"><label for="product-desc">Descrição/ingredientes</label><textarea id="product-desc" rows="3" maxlength="240" required></textarea></div>
+      <div class="form-row"><label for="product-category">Categoria</label><select id="product-category"><option value="tradicional">Tradicional</option><option value="especial">Especial</option></select></div>
+      <div class="form-row"><label for="product-price">Preço (R$)</label><input id="product-price" type="number" min="0.01" step="0.01" required></div>
+      <div class="form-actions"><button class="btn-primary" type="submit" id="product-save">Salvar produto</button><button class="btn-cancel" type="button" id="product-cancel" hidden>Cancelar edição</button></div>
+    </form>
+    <div class="admin-product-list" id="admin-product-list"></div>
+    <p class="admin-local-note">As alterações ficam salvas neste navegador. Para atualizar o cardápio padrão do site, edite <code>assets/js/data.js</code>.</p>
+  </section>
+
+  <section class="tab-page" id="tab-mesas" aria-label="Mesas e QR Codes">
+    <h1 class="section-title">Mesas e QR Codes</h1>
     <div class="panel-card">
-      <h3>📋 Adicionar Item ao Cardápio</h3>
-      <div class="form-row">
-        <label for="new-name">Nome do Pastel</label>
-        <input type="text" id="new-name" placeholder="Ex: Especial da Casa" maxlength="60" />
-      </div>
-      <div class="form-row">
-        <label for="new-desc">Ingredientes</label>
-        <textarea id="new-desc" placeholder="Ex: Frango, mussarela, tomate..." rows="3"></textarea>
-      </div>
-      <div class="form-row">
-        <label for="new-cat">Categoria</label>
-        <select id="new-cat">
-          <option value="tradicional">Tradicional</option>
-          <option value="especial">Especial</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="new-price">Preço (R$)</label>
-        <input type="number" id="new-price" placeholder="0.00" step="0.01" min="0.01" />
-      </div>
-      <button class="btn-primary" id="btn-add-item">➕ Adicionar Item</button>
+      <h3>Cadastrar mesa</h3>
+      <div class="form-row"><label for="table-name">Nome/número da mesa</label><input id="table-name" maxlength="40" placeholder="Ex.: Mesa 1"></div>
+      <button class="btn-primary" id="table-add" type="button">Gerar QR Code</button>
     </div>
+    <div class="table-list" id="table-list"></div>
+  </section>
 
-    <!-- Informações da loja -->
-    <div class="panel-card">
-      <h3>🏪 Informações da Loja</h3>
-      <div class="form-row">
-        <label for="cfg-nome">Nome da Loja</label>
-        <input type="text" id="cfg-nome" value="Ki-Delícia Pastelaria" maxlength="80" />
-      </div>
-      <div class="form-row">
-        <label for="cfg-wpp">WhatsApp</label>
-        <input type="tel" id="cfg-wpp" value="(99) 98443-6545" />
-      </div>
-      <div class="form-row">
-        <label for="cfg-end">Endereço</label>
-        <input type="text" id="cfg-end" placeholder="Rua, número, bairro..." />
-      </div>
-      <button class="btn-primary" id="btn-save-config">💾 Salvar Configurações</button>
-    </div>
-
+  <section class="tab-page" id="tab-config" aria-label="Configurações da loja">
+    <h1 class="section-title">Configurações da loja</h1>
+    <form class="panel-card" id="store-config-form">
+      <div class="form-row"><label for="store-name">Nome da loja</label><input id="store-name" maxlength="80" required></div>
+      <div class="form-row"><label for="store-whatsapp">WhatsApp com DDI e DDD</label><input id="store-whatsapp" type="tel" placeholder="5599984436545" required></div>
+      <div class="form-row"><label for="store-maps">Link do Google Maps</label><input id="store-maps" type="url" required></div>
+      <button class="btn-primary" type="submit">Salvar configurações</button>
+    </form>
   </section>
 
 </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>Ki-Delícia Pastelaria</strong>
+      <span>O Sabor Que Pede Bis!</span>
+    </div>
+    <div class="footer-links" aria-label="Contato e localização">
+      <a id="footer-whatsapp" href="https://wa.me/5599984436545" target="_blank" rel="noopener noreferrer">WhatsApp: (99) 98443-6545</a>
+      <a id="footer-maps" href="https://maps.app.goo.gl/23deY4MwVhXyifYx7" target="_blank" rel="noopener noreferrer">📍 Ver localização no mapa</a>
+    </div>
+    <small>© 2026 Ki-Delícia Pastelaria. Todos os direitos reservados.</small>
+  </div>
+</footer>
 
 <!-- ═══════════════════════════════════════════
      CARRINHO (FAB + DRAWER)
@@ -197,10 +180,14 @@
     <span id="cart-total-val">R$ 0,00</span>
   </div>
   <div class="cart-customer">
-    <div class="form-row">
-      <label for="cust-name">Seu Nome</label>
+      <div class="form-row">
+        <label for="cust-name">Seu Nome</label>
       <input type="text" id="cust-name" placeholder="Ex: João Silva" maxlength="60" />
-    </div>
+      </div>
+    <div class="form-row"><label for="order-type">Tipo do pedido</label><select id="order-type"><option value="retirada">Retirada no balcão</option><option value="mesa">Consumir na mesa</option><option value="entrega">Entrega</option></select></div>
+    <div class="form-row" id="table-select-row" hidden><label>Mesa</label><p id="order-table-label" class="table-context">Leia o QR Code da mesa para fazer o pedido.</p></div>
+    <div class="form-row" id="pickup-route-row" hidden><a id="pickup-route" href="#" target="_blank" rel="noopener noreferrer">📍 Como chegar à pastelaria</a></div>
+    <div class="form-row" id="delivery-address-row" hidden><label for="cust-address">Endereço para entrega</label><input id="cust-address" placeholder="Rua, número, bairro e complemento" maxlength="180"></div>
     <div class="form-row">
       <label for="cust-obs">Observação</label>
       <input type="text" id="cust-obs" placeholder="Ex: sem pimenta..." maxlength="120" />
@@ -223,10 +210,22 @@
   </div>
 </div>
 
+
+
 <!-- ═══════════════════════════════════════════
      TOAST
 ════════════════════════════════════════════ -->
 <div id="toast" role="alert" aria-live="assertive"></div>
+
+<div class="modal-backdrop" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+  <form class="modal" id="admin-login-form">
+    <h3 id="login-title">Acesso administrativo</h3>
+    <div class="form-row"><label for="admin-user">Usuário</label><input id="admin-user" autocomplete="username" required></div>
+    <div class="form-row"><label for="admin-pass">Senha</label><input id="admin-pass" type="password" autocomplete="current-password" required></div>
+    <p id="login-error" role="alert"></p>
+    <div class="modal-btns"><button class="btn-confirm" type="submit">Entrar</button><button class="btn-cancel" type="button" id="login-cancel">Cancelar</button></div>
+  </form>
+</div>
 
 <!-- ═══════════════════════════════════════════
      SCRIPTS (ES Modules)

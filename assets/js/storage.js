@@ -8,6 +8,7 @@ const KEYS = {
   ORDERS:  'kd_orders',
   NEXT_ID: 'kd_nextid',
   CONFIG:  'kd_config',
+  TABLES: 'kd_tables',
 };
 
 /**
@@ -71,6 +72,9 @@ export function loadConfig() {
 export function saveConfig(config) {
   write(KEYS.CONFIG, config);
 }
+
+export function loadTables() { return read(KEYS.TABLES) || []; }
+export function saveTables(tables) { write(KEYS.TABLES, tables); }
 
 /** Salva tudo de uma vez (menu, pedidos e nextId). */
 export function saveAll({ menu, orders, nextId }) {

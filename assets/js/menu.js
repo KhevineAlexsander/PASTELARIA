@@ -6,8 +6,15 @@
 import { formatBRL } from './ui.js';
 import { addToCart }  from './cart.js';
 
+// Foto padrão usada nos produtos que não têm uma imagem própria.
+const DEFAULT_PRODUCT_IMAGE = 'assets/images/pasteis-cartoon.svg';
+
 /** Referência ao array de itens do cardápio (gerenciado pelo main). */
 let _menu = [];
+
+function _escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
 
 /** Define o menu atual (chamado pelo main.js após carregar do storage). */
 export function setMenu(menu) {
@@ -57,11 +64,12 @@ function _renderGrid(gridId, items, isEspecial) {
 
   grid.innerHTML = items.map(i => `
     <div class="item-card ${isEspecial ? 'especial' : ''}">
-      <div class="item-name">${i.name}</div>
-      <div class="item-desc">${i.desc}</div>
+      <img class="item-photo" src="${_escapeHTML(i.image || DEFAULT_PRODUCT_IMAGE)}" alt="Pastel ${_escapeHTML(i.name)}" loading="lazy" />
+      <div class="item-name">${_escapeHTML(i.name)}</div>
+      <div class="item-desc">${_escapeHTML(i.desc)}</div>
       <div class="item-footer">
         <div class="item-price">${formatBRL(i.price)}</div>
-        <button class="btn-add" data-id="${i.id}" title="Adicionar ao pedido" aria-label="Adicionar ${i.name}">+</button>
+        <button class="btn-add" data-id="${i.id}" title="Adicionar ao pedido" aria-label="Adicionar ${_escapeHTML(i.name)}">+</button>
       </div>
     </div>`).join('');
 

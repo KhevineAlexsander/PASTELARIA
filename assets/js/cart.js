@@ -8,6 +8,10 @@ import { formatBRL, toast } from './ui.js';
 /** @type {Array<{id: number, name: string, price: number, qty: number}>} */
 let _cart = [];
 
+function _escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
 /** Retorna uma cópia do carrinho atual. */
 export function getCart() {
   return [..._cart];
@@ -91,7 +95,7 @@ function _renderDrawer() {
   list.innerHTML = _cart.map(c => `
     <div class="cart-item">
       <div class="cart-item-info">
-        <div class="cart-item-name">${c.name}</div>
+        <div class="cart-item-name">${_escapeHTML(c.name)}</div>
         <div class="cart-item-price">${formatBRL(c.price * c.qty)} (${c.qty}x)</div>
       </div>
       <div class="qty-ctrl">

@@ -6,6 +6,7 @@
 import { STATUS_LABELS, STATUS_NEXT, STATUS_BADGE } from './data.js';
 import { formatBRL, toast, openModal } from './ui.js';
 import { saveOrders, saveNextId } from './storage.js';
+import { isSupabaseConfigured, updateRemoteOrder, deleteRemoteOrder } from './supabase.js';
 
 /** @type {any[]} */
 let _orders  = [];
@@ -29,11 +30,14 @@ export function getNextId()  { return _nextId; }
  * @param {{ customer: string, obs: string, items: any[], total: number }} data
  * @returns {object} O pedido criado
  */
-export function createOrder({ customer, obs, items, total }) {
+export function createOrder({ customer, obs, items, total, type = 'mesa', table = '', address = '', id = '' }) {
   const order = {
-    id:       '#' + _nextId++,
+    id:       id || '#' + _nextId++,
     customer: customer || 'Cliente',
     obs,
+    type,
+    table,
+    address,
     items,
     total,
     status:   'pendente',
@@ -56,6 +60,7 @@ export function advanceOrder(id) {
   if (!next) return;
   order.status = next;
   _persist();
+  if (isSupabaseConfigured()) updateRemoteOrder(order).catch(error => toast(`Erro ao atualizar pedido: ${error.message}`, 5000));
   renderOrders();
   renderStats();
   toast(`Pedido ${id}: ${STATUS_LABELS[next]}`);
@@ -69,6 +74,7 @@ export function deleteOrder(id) {
   openModal('Excluir pedido?', `Remover o pedido ${id}?`, () => {
     _orders = _orders.filter(o => o.id !== id);
     _persist();
+    if (isSupabaseConfigured()) deleteRemoteOrder(id).catch(error => toast(`Erro ao excluir pedido: ${error.message}`, 5000));
     renderOrders();
     renderStats();
   });
@@ -106,6 +112,8 @@ export function renderOrders() {
       </div>
       <div class="order-items">
         ${o.items.map(i => `${i.qty}x ${i.name}`).join(' · ')}
+        <br><strong>${o.type === 'entrega' ? 'Entrega' : o.type === 'retirada' ? 'Retirada' : `Mesa ${o.table || ''}`}</strong>
+        ${o.address ? `<br>Endereço: ${o.address}` : ''}
         ${o.obs ? `<br><em>Obs: ${o.obs}</em>` : ''}
       </div>
       <div class="order-footer">
