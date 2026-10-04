@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "ki-delicia-pastelaria",
+  "outputDirectory": ".",
   "routes": [
     {
       "src": "/assets/(.*)",
